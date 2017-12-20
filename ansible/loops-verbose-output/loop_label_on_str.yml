@@ -1,0 +1,19 @@
+---
+- name: Output for the task with a loop - string for label
+  hosts: vEOS-01
+  connection: local
+
+  tasks:
+  - name: Get list of the BGP peers
+    eos_command:
+     commands:
+      - show ip bgp sum | json
+    register: bgp_sum
+
+  - name: Get routes for each of the BGP peers
+    eos_command:
+     commands:
+      - show ip bgp neighbors {{ item.key }} routes | json
+    with_dict: "{{ bgp_sum.stdout.0.vrfs.default.peers }}"
+    loop_control:
+     label: "dummy_label"
