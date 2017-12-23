@@ -1,0 +1,14 @@
+# get-timestamp-fact.yml
+---
+- name: Uses ansible_date_time fact to retrieve data and timestamp
+  hosts: localhost
+
+  tasks:
+
+  - name: Ansible fact - ansible_date_time
+    debug:
+     var: ansible_date_time
+
+  - name: Ansible fact - ansible_date_time.iso8601
+    debug:
+     msg: "Timestamp in the ISO8601 format: {{ ansible_date_time.iso8601 }}"

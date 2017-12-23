@@ -1,0 +1,32 @@
+# get-timestamp-os.yml
+---
+- name: Uses shell module to retrieve data and timestamp from the OS
+  hosts: localhost
+
+  tasks:
+
+  - name: Get timestamp from the system
+    shell: "date +%Y-%m-%d%H-%M-%S"
+    register: tstamp
+
+  - name: Get timestamp from the system, include the first 5 nanoseconds digits
+    shell: "date +%Y-%m-%d%H-%M-%S.%5N"
+    register: tstamp_ns
+
+  - name: Set variables
+    set_fact:
+     cur_date: "{{ tstamp.stdout[0:10]}}"
+     cur_time: "{{ tstamp.stdout[10:]}}"
+     cur_time_ns: "{{ tstamp_ns.stdout[10:]}}"
+
+  - name: System timestamp - date
+    debug:
+     msg:  "Current date: {{ cur_date }}"
+
+  - name: System timestamp - time
+    debug:
+     msg:  "Current date: {{ cur_time }}"
+
+  - name: System timestamp - time, including the first 5 nanoseconds digits
+    debug:
+     msg:  "Current date: {{ cur_time_ns }}"
