@@ -1,0 +1,28 @@
+---
+- name: Append to list
+  hosts: localhost
+
+  vars:
+   cisco:
+    - CiscoRouter01 
+    - CiscoRouter02
+    - CiscoRouter03
+    - CiscoSwitch01
+   arista:
+    - AristaSwitch01
+    - AristaSwitch02
+    - AristaSwitch03
+
+  tasks:
+
+  - name: Add Cisco and Airsta devices to the list
+    set_fact:
+     devices: "{{ item }}"
+    with_items: 
+     - "{{ cisco }}"
+     - "{{ arista }}"
+
+  - name: Debug dicttionary
+    debug: 
+     var: devices
+     verbosity: 0

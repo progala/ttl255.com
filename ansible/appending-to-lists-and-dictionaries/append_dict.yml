@@ -1,0 +1,31 @@
+---
+- name: Append to dictionary
+  hosts: localhost
+
+  vars:
+   cisco:
+    - CiscoRouter01 
+    - CiscoRouter02
+    - CiscoRouter03
+    - CiscoSwitch01
+   arista:
+    - AristaSwitch01
+    - AristaSwitch02
+    - AristaSwitch03
+
+  tasks:
+
+  - name: Add Cisco devices to the dictionary
+    set_fact:
+     devices: "{{ {item: 'Cisco'} }}"
+    with_items: "{{ cisco }}"
+
+  - name: Add Arista devices to the dictionary
+    set_fact:
+     devices: "{{ {item: 'Arista'} }}"
+    with_items: "{{ arista }}"
+
+  - name: Debug dicttionary
+    debug:
+     msg: "{{ devices }}"
+     verbosity: 0
