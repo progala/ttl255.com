@@ -1,0 +1,31 @@
+---
+- name: IP validation examples
+  hosts: localhost
+
+  vars:
+   single_ipv4_val: 10.1.1.45
+   single_ipv4_inv: 2.4.16.256
+   single_ipv6_val: ba0::bab
+   single_ipv6_inv: ce:d::ar
+   ipv4_list: [10.1.1.0/24, 172.16.1.9, 192.168.6.1/32, 10.3.5.777, 224.0.0.10]
+   ipv6_list: ['fe80::1', '2001:dba::/32', '::1', '2002::120a::af:0', 'ff02::5']
+
+  tasks:
+  
+  - name: Check if a string is a valid IPv4
+    debug:
+     msg: "'single_ipv4_val': {{ single_ipv4_val | ipv4 }};
+           'single_ipv4_inv': {{ single_ipv4_inv | ipv4 }}"
+
+  - name: Check if a string is a valid IPv6
+    debug:
+     msg: "'single_ipv6_val': {{ single_ipv6_val | ipv6 }};
+           'single_ipv6_inv': {{ single_ipv6_inv | ipv6 }}"
+
+  - name: Show valid IPv4s in the list of strings
+    debug:
+     msg: "Valid IPv4 addresses in 'ipv4_list': {{ ipv4_list | ipv4 }}"
+
+  - name: Show valid IPv6s in the list of strings
+    debug:
+     msg: "Valid IPv6 addresses in 'ipv6_list': {{ ipv6_list | ipv6 }}"

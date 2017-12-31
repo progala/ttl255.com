@@ -1,0 +1,32 @@
+---
+- name: Getting values for network/host addresses
+  hosts: localhost
+
+  vars:
+   host_pfx: 10.5.0.5/24
+   net_mask: '172.24.0.0/255.255.0.0'
+   net_pfx: 192.168.84.0/24
+   addr_mix: ['10.3.2.1/24', '10.3.9.27', '10.5.20.0/24', '172.20.1.1/255.255.255.0']
+
+  tasks:
+  - name: Return host portion and network the host belongs to
+    debug: 
+     msg: "host: {{ host_pfx | ipaddr('address') }}, 
+           network: {{ host_pfx | ipaddr('network/prefix') }}"
+
+  - name: Convert network/netmask to network/pfx format
+    debug:
+     msg: "Before: {{ net_mask }}, after: {{ net_mask | ipaddr('network/prefix') }}"
+
+  - name: Convert network/pfx to net/netmask format
+    debug:
+     msg: "Before: {{ net_pfx }}, after: {{ net_pfx | ipaddr('network') }}
+           {{ net_pfx | ipaddr('netmask')}}"
+
+  - name: Get broadcast address
+    debug:
+     msg: "Broadcast address for {{ net_pfx  }}: {{ net_pfx | ipaddr('broadcast') }}"
+
+  - name: Return only host addresses with prefix/netmask
+    debug:
+     msg: "{{ addr_mix | ipaddr('host/prefix') }}"

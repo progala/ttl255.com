@@ -1,0 +1,19 @@
+---
+- name: Get real and virtual IPs for VARP setup
+  hosts: localhost
+
+  vars:
+   vl_net: 10.99.6.0/24
+ 
+  tasks:
+  - name: Get virtual IP
+    debug:
+     msg: "{{ vl_net | ipaddr('1') }}"
+
+  - name: Get first real IP
+    debug:
+     msg: "{{ vl_net | ipaddr('2') }}"
+
+  - name: Get second real IP
+    debug:
+     msg: "{{ vl_net | ipaddr('3') }}"
