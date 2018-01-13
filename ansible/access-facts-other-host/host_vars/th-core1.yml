@@ -1,0 +1,8 @@
+---
+lo0: 10.1.1.57
+
+bgp:
+ as: 65002
+ peers:
+  - ld4-core1
+  - inx-core1

@@ -1,0 +1,10 @@
+---
+- name: Example of accessing facts of another host
+  hosts: all
+  connection: local
+
+  tasks:
+  - name: Generate BGP config, including neighbor statements
+    template:
+     src: bgp_config.j2
+     dest: "configs/{{ inventory_hostname }}_bgp_config.cfg"

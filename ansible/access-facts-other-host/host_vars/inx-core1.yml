@@ -1,0 +1,8 @@
+---
+lo0: 10.1.1.99
+
+bgp:
+ as: 65003
+ peers:
+  - ld4-core1
+  - th-core1
