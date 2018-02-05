@@ -1,0 +1,30 @@
+---
+- name: Working with extra variables - Pass OS version
+  hosts: vEOS-01
+  connection: local
+  gather_facts: no
+
+  tasks:
+
+  - name: EOS >= 4.16.7 VRF aware SNMP source interface
+    set_fact:
+      config_lines:
+        - snmp-server vrf mgmt source-interface Management1
+    when: eos_ver[2:] | float > 16.6
+
+  - name: EOS < 4.16.7 Non-VRF aware SNMP source interface
+    set_fact:
+      config_lines:
+        - snmp-server source-interface Management1
+    when: eos_ver[2:] | float < 16.7
+
+  - name: Configure SNMP source interface based on the EOS version
+    eos_config:
+      lines: "{{ config_lines }}"
+      authorize: yes
+    register: debug_out
+    
+  - name: Debug chosen config line
+    debug:
+      msg: "{{ debug_out.commands }}"
+    when: debug_out.changed

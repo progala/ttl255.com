@@ -1,0 +1,23 @@
+---
+- name: Working with extra variables - Conditional debug
+  hosts: vEOS-01
+  connection: local
+  gather_facts: no
+
+  tasks:
+
+  - name: Configure a dummy ACL
+    eos_config:
+      lines:
+        - 10 permit ip 10.0.1.42/32 172.16.1.0/24
+        - 20 deny ip any any
+      parents: ip access-list DUMMY_ACL
+      before: no ip access-list DUMMY_ACL
+      replace: block
+      authorize: yes
+    register: debug_out
+    
+  - name: Debug output from the device
+    debug:
+      var: debug_out
+    when: debug is defined

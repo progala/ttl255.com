@@ -1,0 +1,6 @@
+[arista]
+vEOS-01 ansible_host=10.50.0.2 host=10.50.0.2
+
+[all:vars]
+ansible_user=ansible
+ansible_ssh_pass=ansible

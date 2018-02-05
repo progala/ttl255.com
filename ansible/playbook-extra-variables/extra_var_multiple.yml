@@ -1,0 +1,11 @@
+---
+- name: Working with extra variables - Multiple vars
+  hosts: localhost
+  connection: local
+  gather_facts: no
+
+  tasks:
+
+  - name: Multiple extra variables test
+    debug:
+     msg: "Var1: {{ my_var1 }}; Var2: {{ my_var2 }}"

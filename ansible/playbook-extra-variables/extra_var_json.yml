@@ -1,0 +1,21 @@
+---
+- name: Working with extra variables - Cmd Line JSON
+  hosts: localhost
+  connection: local
+  gather_facts: no
+
+  tasks:
+
+  - name: CmdLine JSON - string
+    debug:
+     msg: "{{ my_string }}"
+
+  - name: CmdLine JSON - float
+    debug:
+     msg: "Passed float: {{ my_float }}; Subtracted from 1.0: {{ 1.0 - my_float }}"
+
+  - name: CmdLine JSON - list
+    debug:
+     msg: "{{ item }}"
+    with_items: "{{ my_list }}"
+

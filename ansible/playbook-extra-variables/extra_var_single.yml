@@ -1,0 +1,11 @@
+---
+- name: Working with extra variables - Single var
+  hosts: localhost
+  connection: local
+  gather_facts: no
+
+  tasks:
+
+  - name: Extra variable test
+    debug:
+     msg: "{{ my_var }}"
