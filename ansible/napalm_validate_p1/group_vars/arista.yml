@@ -1,0 +1,6 @@
+---
+napalm_provider:
+ hostname={{ host }}
+ username=ansible
+ dev_os=eos
+ password=ansible

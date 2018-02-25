@@ -1,0 +1,17 @@
+---
+- name: Get lldp neighbours
+  hosts: arista
+  connection: local
+
+  tasks:
+  - name: Use napalm_get_facts to retrieve lldp neighbours
+    napalm_get_facts:
+      provider: "{{ napalm_provider }}"
+      optional_args:
+        eos_transport: http
+      filter: 'lldp_neighbors'
+    register: lldp_facts
+
+  - name: Debug lldp neighbours
+    debug:
+      var: lldp_facts
