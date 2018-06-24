@@ -1,0 +1,13 @@
+---
+- get_facts:
+    interface_list:
+      _mode: strict
+      list:
+        - Ethernet1
+        - Ethernet2
+        - Loopback0
+        - Loopback100
+        - Management1
+        - Vlan700
+        - Vlan721
+        - Vlan4094

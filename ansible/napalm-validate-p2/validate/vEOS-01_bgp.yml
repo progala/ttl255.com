@@ -1,0 +1,12 @@
+---
+- get_bgp_neighbors:
+    global:
+      peers:
+        10.1.11.2:
+          is_enabled: true
+          is_up: true
+          remote_as: 65101
+          address_family:
+            ipv4:
+              sent_prefixes: 7
+              received_prefixes: '<=10'

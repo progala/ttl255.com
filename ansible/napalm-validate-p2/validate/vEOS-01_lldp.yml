@@ -1,0 +1,10 @@
+---
+- get_lldp_neighbors:
+    Ethernet1:
+      - hostname: EOS-0
+        port: Ethernet1
+    Ethernet2:
+      - hostname: vEOS
+    Ethernet3:
+      - hostname: CSR-01.lab
+        port: Gi5

@@ -1,0 +1,17 @@
+---
+- name: Get BGP neighbours
+  hosts: "{{ device }}"
+  connection: local
+
+  tasks:
+  - name: Use napalm_get_facts to retrieve BGP neighbours
+    napalm_get_facts:
+      provider: "{{ napalm_provider }}"
+      optional_args:
+        eos_transport: http
+      filter: 'bgp_neighbors'
+    register: bgp_peers
+
+  - name: Debug BGP neighbours
+    debug:
+      var: bgp_peers

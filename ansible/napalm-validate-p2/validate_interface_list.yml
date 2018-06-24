@@ -1,0 +1,26 @@
+---
+- name: Validate interfaces
+  hosts: "{{ device }}"
+  connection: local
+
+  vars:
+    val_dir: "{{ playbook_dir }}/validate"
+
+  tasks:
+  - name: Use Napalm to automatically validate existing interfaces
+    napalm_validate:
+      provider: "{{ napalm_provider }}"
+      validation_file: "{{ val_dir }}/{{ inventory_hostname }}_interfaces.yml"
+      optional_args:
+        eos_transport: http
+    register: val_intf
+    ignore_errors: yes
+
+  - name: Display full compliance report
+    debug:
+      var: val_intf.compliance_report
+
+  - name: Compliance check failed
+    fail:
+      msg: "Non-compliant state encountered. Refer to the full report."
+    when: not val_intf.compliance_report.complies

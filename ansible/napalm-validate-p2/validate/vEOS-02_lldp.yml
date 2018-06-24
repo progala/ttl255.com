@@ -1,0 +1,8 @@
+---
+- get_lldp_neighbors:
+   Ethernet1:
+    - hostname: vEOS-01.lab
+      port: Ethernet1
+   Ethernet2:
+    - hostname: ^vEOS-03$
+      port: Ethernet2
