@@ -1,0 +1,5 @@
+# Provide URL of your NETBOX
+NETBOX_URL = "NETBOX_URL"
+
+# Provide your API KEY
+NETBOX_TOKEN = "API_TOKEN"
