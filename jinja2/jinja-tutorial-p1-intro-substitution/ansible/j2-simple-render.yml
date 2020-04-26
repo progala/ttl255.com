@@ -1,0 +1,10 @@
+---
+- hosts: core-sw-waw-01
+  gather_facts: no
+  connection: local
+
+  tasks:
+    - name: Render config for host
+      template:
+        src: "templates/base-cfg.j2"
+        dest: "out/{{ inventory_hostname }}.cfg"
