@@ -1,0 +1,9 @@
+{% if 'Loopback0' in interfaces -%}
+sflow source-interface Loopback0
+snmp-server source-interface Loopback0
+ip radius source-interface Loopback0
+{%- else %}
+sflow source-interface Management1
+snmp-server source-interface Management1
+ip radius source-interface Management1
+{% endif %}

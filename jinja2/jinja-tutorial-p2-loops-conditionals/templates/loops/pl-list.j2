@@ -1,0 +1,5 @@
+# Configuring Prefix List
+ip prefix-list PL_AS_65003_IN
+{%- for line in PL_AS_65003_IN %}
+ {{ line -}}
+{% endfor %}

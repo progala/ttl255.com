@@ -1,0 +1,11 @@
+{% if x and y -%}
+Both x and y are True. x: {{ x }}, y: {{ y }}
+{%- endif %}
+
+{% if x or z -%}
+At least one of x and z is True. x: {{ x }}, z: {{ z }}
+{%- endif %}
+
+{% if not z -%}
+We see that z is not True. z: {{ z }}
+{%- endif %}

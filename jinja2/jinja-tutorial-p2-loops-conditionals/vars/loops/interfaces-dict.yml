@@ -1,0 +1,7 @@
+interfaces:
+  Ethernet2:
+    description: leaf01-eth51
+    ipv4_address: 10.50.0.0/31
+  Ethernet3:
+    description: leaf02-eth51
+    ipv4_address: 10.50.0.2/31

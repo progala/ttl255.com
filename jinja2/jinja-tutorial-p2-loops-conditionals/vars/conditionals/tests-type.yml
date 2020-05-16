@@ -1,0 +1,13 @@
+hostname: sw-office-lon-01
+
+eos_ver: 4.22
+
+bgp_as: 65001
+
+interfaces:
+  Ethernet1: Uplink to core
+
+dns_servers:
+  - 1.1.1.1
+  - 8.8.4.4
+  - 8.8.8.8

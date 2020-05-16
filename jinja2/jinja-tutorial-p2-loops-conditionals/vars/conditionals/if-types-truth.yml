@@ -1,0 +1,6 @@
+my_list: ["list-element"]
+my_dict: {"my_key": "my_value"}
+my_string: "example string"
+my_list_empty: []
+my_dict_empty: {}
+my_string_empty: ""

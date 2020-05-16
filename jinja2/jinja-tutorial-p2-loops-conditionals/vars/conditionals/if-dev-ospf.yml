@@ -1,0 +1,10 @@
+hostname: router-w-ospf
+routing_protocol: ospf
+
+interfaces:
+  Loopback0:
+    ip: 10.0.0.2
+    mask: 32
+
+ospf:
+  pid: 1

@@ -1,0 +1,5 @@
+PL_AS_65003_IN_line1: "permit 10.96.0.0/24"
+PL_AS_65003_IN_line2: "permit 10.97.11.0/24"
+PL_AS_65003_IN_line3: "permit 10.99.15.0/24"
+PL_AS_65003_IN_line4: "permit 10.100.5.0/25"
+PL_AS_65003_IN_line5: "permit 10.100.6.128/25"

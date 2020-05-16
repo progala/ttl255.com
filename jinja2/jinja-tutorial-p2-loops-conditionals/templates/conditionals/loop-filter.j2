@@ -1,0 +1,5 @@
+=== Interfaces with assigned IPv4 addresses ===
+
+{% for intf, idata in interfaces.items() if idata.ipv4_address is defined -%}
+{{ intf }} - {{ idata.description }}: {{ idata.ipv4_address }}
+{% endfor -%}

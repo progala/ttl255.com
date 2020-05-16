@@ -1,0 +1,17 @@
+interfaces:
+  Loopback0:
+    description: Control Plane traffic
+    ipv4_address: 10.255.255.34/32
+  Management1:
+    description: Management interface
+    ipv4_address: 10.10.0.5/24
+  Ethernet1:
+    description: Span port - SPAN1
+  Ethernet2:
+    description: PortChannel50 - port 1
+  Ethernet51:
+    description: leaf01-eth51
+    ipv4_address: 10.50.0.0/31
+  Ethernet52:
+    description: leaf02-eth51
+    ipv4_address: 10.50.0.2/31
