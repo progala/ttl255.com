@@ -1,5 +1,5 @@
 {% for intf in interfaces -%}
 interface {{ intf }}
- {{ interfaces[intf].description }}
- {{ interfaces[intf].ipv4_address }}
+ description {{ interfaces[intf].description }}
+ ip address {{ interfaces[intf].ipv4_address }}
 {%- endfor %}

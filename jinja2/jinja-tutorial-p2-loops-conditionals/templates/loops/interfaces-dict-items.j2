@@ -1,5 +1,5 @@
 {% for iname, idata in interfaces.items() -%}
 interface {{ iname }}
- {{ idata.description }}
- {{ idata.ipv4_address }}
+ description {{ idata.description }}
+ ip address {{ idata.ipv4_address }}
 {% endfor %}
