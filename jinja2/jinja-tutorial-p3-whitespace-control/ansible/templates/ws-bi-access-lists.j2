@@ -1,0 +1,12 @@
+{% for acl, acl_lines in access_lists.items() %}
+ip access-list extended {{ acl }}
+{%   for line in acl_lines %}
+{%     if line.action == "remark" %}
+  remark {{ line.text }}
+{%     elif line.action == "permit" %}
+  permit {{ line.src }} {{ line.dst }}
+{%     endif %}
+{%   endfor %}
+{% endfor %}
+
+# All ACLs have been generated

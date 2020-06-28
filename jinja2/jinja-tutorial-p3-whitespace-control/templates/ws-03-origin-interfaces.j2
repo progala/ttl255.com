@@ -1,0 +1,7 @@
+{% for iname, idata in interfaces.items() %}(1)
+interface {{ iname }}
+ description {{ idata.description }}
+  (2){% if idata.ipv4_address is defined %}
+ ip address {{ idata.ipv4_address }}
+  (3){% endif %}
+{% endfor %}

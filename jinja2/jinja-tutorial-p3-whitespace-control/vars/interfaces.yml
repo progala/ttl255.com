@@ -1,0 +1,7 @@
+---
+interfaces:
+  Ethernet1:
+    description: capture-port
+  Ethernet2:
+    description: leaf01-eth51
+    ipv4_address: 10.50.0.0/31

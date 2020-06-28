@@ -1,0 +1,8 @@
+---
+access_lists:
+  al-hq-in:
+    - action: remark
+      text: Allow traffic from hq to local office
+    - action: permit
+      src: 10.0.0.0/22
+      dst: 10.100.0.0/24

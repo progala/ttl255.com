@@ -1,0 +1,19 @@
+---
+- hosts: localhost
+  gather_facts: no
+  connection: local
+
+  vars_files:
+    - vars/access-lists.yml
+
+
+  tasks:
+    - name: Show vars
+      debug:
+        msg: "{{ access_lists }}"
+
+    - name: Render config for host
+      template:
+        src: "templates/ws-access-lists.j2"
+        dest: "out/ws-lstrip.txt"
+        lstrip_blocks: yes
