@@ -1,0 +1,16 @@
+Ethernet1:
+  description: Uplink to core-1
+  mtu: 9000
+  properties:
+  - pim
+  - ptp
+  - lldp
+  speed: 1000
+Ethernet2:
+  description: Uplink to core-2
+  mtu: 9000
+  properties:
+  - pim
+  - ptp
+  - lldp
+  speed: 1000
