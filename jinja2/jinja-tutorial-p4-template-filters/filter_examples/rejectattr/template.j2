@@ -1,0 +1,5 @@
+Routed interfaces:
+
+{% for intf in interfaces | rejectattr('mode', 'eq', 'switched') %}
+{{ intf.name }}
+{% endfor %}

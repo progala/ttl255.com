@@ -1,0 +1,5 @@
+{% for intf in interfaces %}
+interface {{ intf.name }}
+  switchport mode access
+  switchport access vlan {{ intf.vlan | default('10') }}
+{% endfor %}

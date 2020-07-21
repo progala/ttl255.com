@@ -1,0 +1,4 @@
+{% for pl_name, pl_lines in prefix_lists | dictsort %}
+ip prefix list {{ pl_name }}
+  {{ pl_lines | join('\n') }}
+{% endfor %}

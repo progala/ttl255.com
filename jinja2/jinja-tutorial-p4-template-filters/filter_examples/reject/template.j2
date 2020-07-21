@@ -1,0 +1,4 @@
+Public BGP AS numbers:
+{% for as_no in as_numbers| reject('gt', 64495) %}
+{{ as_no }}
+{% endfor %}

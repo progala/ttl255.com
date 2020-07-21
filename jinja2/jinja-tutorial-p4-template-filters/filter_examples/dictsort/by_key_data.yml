@@ -1,0 +1,7 @@
+prefix_lists:
+  pl-ntt-out:
+    - permit 10.0.0.0/23
+  pl-zayo-out:
+    - permit 10.0.1.0/24
+  pl-cogent-out:
+    - permit 10.0.0.0/24

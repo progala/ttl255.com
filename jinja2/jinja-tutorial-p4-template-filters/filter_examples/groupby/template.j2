@@ -1,0 +1,3 @@
+{% for vid, members in  interfaces | groupby(attribute='vlan') %}
+Interfaces in vlan {{ vid }}: {{ members | map(attribute='name') | join(', ') }}
+{% endfor %}

@@ -1,0 +1,4 @@
+peer_priority:
+  ntt: 200
+  zayo: 300
+  cogent: 100

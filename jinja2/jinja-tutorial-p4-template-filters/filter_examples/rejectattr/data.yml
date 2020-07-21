@@ -1,0 +1,9 @@
+interfaces:
+  - name: Ethernet1
+    mode: switched
+  - name: Ethernet2
+    mode: switched
+  - name: Ethernet3
+    mode: routed
+  - name: Ethernet4
+    mode: switched

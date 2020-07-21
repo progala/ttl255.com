@@ -1,0 +1,7 @@
+interfaces:
+  - name: Ethernet1
+    vlan: 50
+  - name: Ethernet2
+    vlan: 50
+  - name: Ethernet3
+  - name: Ethernet4

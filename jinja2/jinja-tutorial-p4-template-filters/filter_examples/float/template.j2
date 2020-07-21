@@ -1,0 +1,5 @@
+{% if eos_ver | float >= 4.22 %}
+Detected EOS ver {{ eos_ver }}, using new command syntax.
+{% else %}
+Detected EOS ver {{ eos_ver }}, using old command syntax.
+{% endif %}

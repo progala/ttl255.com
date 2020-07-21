@@ -1,0 +1,5 @@
+BGP peers by priority
+
+{% for peer, priority in peer_priority | dictsort(by='value', reverse=true) %}
+Peer: {{ peer }}; priority: {{ priority }}
+{% endfor %}

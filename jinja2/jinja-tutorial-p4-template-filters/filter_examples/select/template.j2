@@ -1,0 +1,4 @@
+Private BGP AS numbers:
+{% for as_no in as_numbers| select('gt', 64495) %}
+{{ as_no }}
+{% endfor %}
