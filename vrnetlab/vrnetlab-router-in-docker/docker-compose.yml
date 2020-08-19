@@ -1,0 +1,28 @@
+version: "3"
+
+services:
+  veos1:
+    image: veos:4.18.10M
+    container_name: veos1
+    privileged: true
+    ports:
+      - "9001:22"
+    network_mode: default
+  veos2:
+    image: veos:4.18.10M
+    container_name: veos2
+    privileged: true
+    ports:
+      - "9002:22"
+    network_mode: default
+  vr-xcon:
+    image: vr-xcon
+    container_name: vr-xcon
+    links:
+      - veos1
+      - veos2
+    command: --p2p veos1/2--veos2/2
+    depends_on:
+      - veos1
+      - veos2
+    network_mode: default
