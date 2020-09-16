@@ -1,0 +1,17 @@
+        10 deny tcp 10.0.0.0/24 10.0.1.0/24 eq tcpmux
+        20 deny tcp 10.0.0.0/24 10.0.1.0/24 eq systat
+        30 deny udp 10.0.0.0/24 10.0.1.0/24 eq daytime
+        40 deny tcp 10.0.0.0/24 10.0.1.0/24 eq ssh
+        50 deny tcp 10.0.0.0/24 10.0.1.0/24 eq telnet
+        60 deny udp 10.0.0.0/24 10.0.1.0/24 eq time
+        70 deny tcp 10.0.0.0/24 10.0.1.0/24 eq gopher
+        80 deny tcp 10.0.0.0/24 10.0.1.0/24 eq acr-nema
+        90 deny udp 10.0.0.0/24 10.0.1.0/24 eq qmtp
+        100 permit tcp 10.0.0.0/24 10.0.1.0/24 eq ipx
+        110 permit tcp 10.0.0.0/24 10.0.1.0/24 eq rpc2portmap
+        120 deny tcp 10.0.0.0/24 10.0.1.0/24 eq svrloc
+        130 deny udp 10.0.0.0/24 10.0.1.0/24 eq talk
+        140 permit tcp 10.0.0.0/24 10.0.1.0/24 eq uucp
+        150 deny tcp 10.0.0.0/24 10.0.1.0/24 eq dhcpv6-server
+        160 deny tcp 10.0.0.0/24 10.0.1.0/24 eq submission
+        170 permit tcp 10.0.0.0/24 10.0.1.0/24 eq ms-sql-m
