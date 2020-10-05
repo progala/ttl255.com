@@ -1,0 +1,107 @@
+{
+    "vrfs": {
+        "default": {
+            "routerId": "10.3.0.2",
+            "vrf": "default",
+            "bgpRouteEntries": {
+                "10.1.0.1/32": {
+                    "bgpAdvertisedPeerGroups": {},
+                    "maskLength": 32,
+                    "bgpRoutePaths": [
+                        {
+                            "asPathEntry": {
+                                "asPathType": null,
+                                "asPath": "i"
+                            },
+                            "med": 0,
+                            "localPreference": 100,
+                            "weight": 0,
+                            "reasonNotBestpath": null,
+                            "nextHop": "10.2.0.0",
+                            "routeType": {
+                                "atomicAggregator": false,
+                                "suppressed": false,
+                                "queued": false,
+                                "valid": true,
+                                "ecmpContributor": false,
+                                "luRoute": false,
+                                "active": true,
+                                "stale": false,
+                                "ecmp": false,
+                                "backup": false,
+                                "ecmpHead": false,
+                                "ucmp": false
+                            }
+                        }
+                    ],
+                    "address": "10.1.0.1"
+                },
+                "10.1.0.2/32": {
+                    "bgpAdvertisedPeerGroups": {},
+                    "maskLength": 32,
+                    "bgpRoutePaths": [
+                        {
+                            "asPathEntry": {
+                                "asPathType": null,
+                                "asPath": "i"
+                            },
+                            "med": 0,
+                            "localPreference": 100,
+                            "weight": 0,
+                            "reasonNotBestpath": null,
+                            "nextHop": "10.2.0.0",
+                            "routeType": {
+                                "atomicAggregator": false,
+                                "suppressed": false,
+                                "queued": false,
+                                "valid": true,
+                                "ecmpContributor": false,
+                                "luRoute": false,
+                                "active": true,
+                                "stale": false,
+                                "ecmp": false,
+                                "backup": false,
+                                "ecmpHead": false,
+                                "ucmp": false
+                            }
+                        }
+                    ],
+                    "address": "10.1.0.2"
+                },
+                "10.1.0.3/32": {
+                    "bgpAdvertisedPeerGroups": {},
+                    "maskLength": 32,
+                    "bgpRoutePaths": [
+                        {
+                            "asPathEntry": {
+                                "asPathType": null,
+                                "asPath": "i"
+                            },
+                            "med": 0,
+                            "localPreference": 100,
+                            "weight": 0,
+                            "reasonNotBestpath": null,
+                            "nextHop": "10.2.0.0",
+                            "routeType": {
+                                "atomicAggregator": false,
+                                "suppressed": false,
+                                "queued": false,
+                                "valid": true,
+                                "ecmpContributor": false,
+                                "luRoute": false,
+                                "active": true,
+                                "stale": false,
+                                "ecmp": false,
+                                "backup": false,
+                                "ecmpHead": false,
+                                "ucmp": false
+                            }
+                        }
+                    ],
+                    "address": "10.1.0.3"
+                }
+            },
+            "asn": "65001"
+        }
+    }
+}

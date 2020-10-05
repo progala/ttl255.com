@@ -1,0 +1,17 @@
+interfaces:
+  Ethernet1:
+    ip_add: 10.1.1.1/31
+    peer: spine1
+    peer_intf: Ethernet1
+  Ethernet2:
+    ip_add: 10.1.1.9/31
+    peer: spine2
+    peer_intf: Ethernet1
+
+bgp:
+  as_no: 65001
+  peers:
+    - intf: Ethernet1
+      as_no: 64512
+    - intf: Ethernet2
+      as_no: 64512

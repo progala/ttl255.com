@@ -1,0 +1,35 @@
+{% import 'ip_funcs.j2' as ipfn -%}
+
+{% macro acl_lines(aclobj, src_pfx, pfx_fmt) -%}
+{% for line in aclobj %}
+ permit {{ line.prot }} {{ pfx_fmt(src_pfx) }} {{ pfx_fmt(line.ip) }} 
+{%- if line.prot in ['udp', 'tcp'] %} eq {{ line.port }}{% endif -%}
+{% endfor -%}
+{%- endmacro -%}
+
+Prefix with prefix length ACL:
+
+{% for net in networks -%}
+ip access-list extended al_{{ net.name }}
+{%-  for svc in net.services -%}
+{{ acl_lines(svc_def[svc], net.prefix, ipfn.ip_w_wc) }}
+{%  endfor -%}
+{% endfor %}
+
+Network with Wildcard ACL:
+
+{% for net in networks -%}
+ip access-list extended al_{{ net.name }}
+{%-  for svc in net.services -%}
+{{ acl_lines(svc_def[svc], net.prefix, ipfn.ip_w_pfxlen) }}
+{%  endfor -%}
+{% endfor %}
+
+Network with network Mask ACL:
+
+{% for net in networks -%}
+ip access-list extended al_{{ net.name }}
+{%-  for svc in net.services -%}
+{{ acl_lines(svc_def[svc], net.prefix, ipfn.ip_w_netm) }}
+{%  endfor -%}
+{% endfor -%}

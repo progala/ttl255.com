@@ -1,0 +1,8 @@
+{% macro def_if_desc(if_role) -%}
+Unused port, dedicated to {{ if_role }} devices
+{%- endmacro -%}
+
+{% for intf in interfaces -%}
+interface {{ intf.name }}
+  description {{ def_if_desc(intf.role) }}
+{% endfor -%}

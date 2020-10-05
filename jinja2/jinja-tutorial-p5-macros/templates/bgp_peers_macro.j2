@@ -1,0 +1,16 @@
+{% macro peer_ip(local_intf) -%}
+{% set local_ip = interfaces[local_intf].ip_add -%}
+{% set fst_ip = local_ip | ipaddr(0) -%}
+{% if fst_ip == local_ip -%}
+{{ fst_ip | ipaddr(1) | ipaddr('address') -}}
+{% else -%}
+{{ fst_ip | ipaddr('address') -}}
+{%- endif -%}
+{% endmacro -%}
+
+router bgp {{ bgp.as_no }}
+{%- for peer in bgp.peers -%}
+{%- set bgp_peer_ip = peer_ip(peer.intf) %}
+ neighbor {{ bgp_peer_ip }} remote-as {{ peer.as_no }}
+ neighbor {{ bgp_peer_ip }} description {{ interfaces[peer.intf].peer }}
+{%- endfor %}

@@ -1,0 +1,11 @@
+router bgp {{ bgp.as_no }}
+{%- for peer in bgp.peers -%}
+{% set fst_ip = interfaces[peer.intf].ip_add | ipaddr(0) -%}
+{% if our_ip == fst_ip -%}
+{% set peer_ip = fst_ip | ipaddr(1) | ipaddr('address') -%}
+{% else -%}
+{% set peer_ip = fst_ip | ipaddr('address') -%}
+{% endif %}
+ neighbor {{ peer_ip }} remote-as {{ peer.as_no }}
+ neighbor {{ peer_ip }} description {{ interfaces[peer.intf].peer }}
+{%- endfor %}

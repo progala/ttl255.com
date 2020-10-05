@@ -1,0 +1,17 @@
+{% macro acl_lines(aclobj, src_pfx) -%}
+{% for line in aclobj %}
+ permit {{ line.prot }} {{ caller(src_pfx) }} {{ caller(line.ip) }} 
+{%- if line.prot in ['udp', 'tcp'] %} eq {{ line.port }}{% endif -%}
+{% endfor -%}
+{%- endmacro -%}
+
+{% for net in networks -%}
+ip access-list extended al_{{ net.name }}
+{%-  for svc in net.services -%}
+
+{% call(ip_net) acl_lines(svc_def[svc], net.prefix) -%}
+{{ ip_net|ipaddr('network/prefix') }}
+{%- endcall -%}
+
+{%  endfor -%}
+{% endfor -%}

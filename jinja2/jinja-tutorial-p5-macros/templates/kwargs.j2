@@ -1,0 +1,10 @@
+{% macro set_access_vlan() -%}
+{% for intf, vid in kwargs.items() -%}
+interface {{ intf }}
+  switchport
+  switchport mode access
+  switchport access vlan {{ vid }}
+{% endfor -%}
+{%- endmacro -%}
+
+{{ set_access_vlan(Ethernet10=10, Ethernet15=15, Ethernet20=20) }}

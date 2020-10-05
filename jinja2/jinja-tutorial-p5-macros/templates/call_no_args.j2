@@ -1,0 +1,9 @@
+{% macro make_acl(type, name) -%}
+ip access-list {{ type }} {{ name }}
+{{- caller() }}
+{%- endmacro -%}
+
+{% call make_acl('extended', 'al-ext-01') %}
+ permit ip 10.0.0.0 0.0.0.255 10.0.0.0.255
+ deny ip any any
+{%- endcall %}

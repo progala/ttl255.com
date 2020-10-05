@@ -1,0 +1,11 @@
+networks:
+  - name: quant_server_net
+    prefix: 10.0.0.0/24
+    services:
+      - computing
+
+svc_def:
+  computing:
+    - {ip: 10.90.0.5/32, prot: tcp, port: 5008}
+    - {ip: 10.91.4.0/255.255.255.0, prot: tcp, port: 5009}
+    - {ip: 10.91.6.32/27, prot: tcp, port: 6800}

@@ -1,0 +1,9 @@
+interfaces:
+ - name: Ethernet10
+   role: desktop
+ - name: Ethernet11
+   role: desktop
+ - name: Ethernet15
+   role: printer
+ - name: Ethernet22
+   role: voice

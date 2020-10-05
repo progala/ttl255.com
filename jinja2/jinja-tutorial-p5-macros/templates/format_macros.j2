@@ -1,0 +1,25 @@
+{% macro ip_w_wc(ip_net) -%}
+{{ ip_net|ipaddr('network') }} {{ ip_net|ipaddr('hostmask')}}
+{%- endmacro -%}
+
+{% macro ip_w_netm(ip_net) -%}
+{{ ip_net|ipaddr('network') }} {{ ip_net|ipaddr('netmask') }}
+{%- endmacro -%}
+
+{% macro ip_w_pfxlen(ip_net) -%}
+{{ ip_net|ipaddr('network/prefix') }}
+{%- endmacro -%}
+
+{% macro acl_lines(aclobj, src_pfx, pfx_fmt) -%}
+{% for line in aclobj %}
+ permit {{ line.prot }} {{ pfx_fmt(src_pfx) }} {{ pfx_fmt(line.ip) }} 
+{%- if line.prot in ['udp', 'tcp'] %} eq {{ line.port }}{% endif -%}
+{% endfor -%}
+{%- endmacro -%}
+
+{% for net in networks -%}
+ip access-list extended al_{{ net.name }}
+{%-  for svc in net.services -%}
+{{ acl_lines(svc_def[svc], net.prefix, ip_w_pfxlen) }}
+{%  endfor -%}
+{% endfor -%}
