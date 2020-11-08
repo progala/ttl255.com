@@ -1,0 +1,6 @@
+{% for pl_name, pl_lines in prefix_lists.items() -%}
+ip prefix-list {{ pl_name }}
+{%- for line in pl_lines %}
+ {{ line -}}
+{%  endfor -%}
+{% endfor %}

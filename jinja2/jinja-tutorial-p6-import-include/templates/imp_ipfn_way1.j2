@@ -1,0 +1,5 @@
+{% import 'macros/ip_funcs.j2' as ipfn %}
+
+{{ ipfn.ip_w_wc('10.0.0.0/24') }}
+{{ ipfn.ip_w_netm('10.0.0.0/24') }}
+{{ ipfn.ip_w_pfxlen('10.0.0.0/24') }}

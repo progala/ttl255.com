@@ -1,0 +1,13 @@
+{# Hostname and banner -#}
+{% include 'base.j2' %}
+
+{% include 'dns.j2' %}
+
+{% include 'ntp.j2' %}
+
+{% include 'interfaces.j2' %}
+
+{% include 'prefix_lists.j2' %}
+
+{# BGP instance and peering -#}
+{% include 'bgp.j2' %}

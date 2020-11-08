@@ -1,0 +1,38 @@
+hostname {{ hostname }}
+
+banner motd ^
+===========================================
+|   This device is property of BigCorpCo  |
+|   Unauthorized access is unauthorized   |
+|  Unless you're authorized to access it  |
+|  In which case play nice and stay safe  |
+===========================================
+^
+
+no ip domain lookup
+ip domain name local.lab
+ip name-server {{ name_server_pri }}
+ip name-server {{ name_server_sec }}
+
+ntp server {{ ntp_server_pri }} prefer
+ntp server {{ ntp_server_sec }}
+ntp server {{ ntp_server_trd }}
+
+{% for iname, idata in interfaces.items() -%}
+interface {{ iname }}
+ {{ idata.description }}
+ {{ idata.ipv4_address }}
+{% endfor %}
+
+{% for pl_name, pl_lines in prefix_lists.items() -%}
+ip prefix-list {{ pl_name }}
+{%- for line in pl_lines %}
+ {{ line -}}
+{%  endfor -%}
+{% endfor %}
+
+router bgp {{ bgp.as_no }}
+{%- for peer in bgp.peers %}
+ neighbor {{ peer.ip }} remote-as {{ peer.as_no }}
+ neighbor {{ peer.ip }} description {{ peer.description }}
+{%- endfor %}

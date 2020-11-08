@@ -1,0 +1,11 @@
+{% macro ip_w_wc(ip_net) -%}
+{{ ip_net|ipaddr('network') }} {{ ip_net|ipaddr('hostmask')}}
+{%- endmacro -%}
+
+{% macro ip_w_netm(ip_net) -%}
+{{ ip_net|ipaddr('network') }} {{ ip_net|ipaddr('netmask') }}
+{%- endmacro -%}
+
+{% macro ip_w_pfxlen(ip_net) -%}
+{{ ip_net|ipaddr('network/prefix') }}
+{%- endmacro -%}

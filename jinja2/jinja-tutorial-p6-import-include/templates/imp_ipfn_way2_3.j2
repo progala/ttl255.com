@@ -1,0 +1,4 @@
+{% from 'macros/ip_funcs.j2' import ip_w_wc as ipwild, ip_w_pfxlen %}
+
+{{ ipwild('10.0.0.0/24') }}
+{{ ip_w_pfxlen('10.0.0.0/24') }}

@@ -1,0 +1,5 @@
+router bgp {{ bgp.as_no }}
+{%- for peer in bgp.peers %}
+ neighbor {{ peer.ip }} remote-as {{ peer.as_no }}
+ neighbor {{ peer.ip }} description {{ peer.description }}
+{%- endfor %}
