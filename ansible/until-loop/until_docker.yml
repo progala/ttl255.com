@@ -1,0 +1,46 @@
+---
+- name: "PLAY 1. Provision lab with virtual routers."
+  hosts: local
+  connection: local
+  gather_facts: no
+    
+  tasks:
+
+  - name: "TASK 1.1. Bring up virtual router containers."
+    docker_container:
+      name: "{{ item }}"
+      image: "{{ vr_image_name }}"
+      privileged: yes
+    register: cont_data
+    loop: "{{ vnodes }}"
+    loop_control:
+      pause: 10
+
+  - name: "TASK 1.2. Wait for virtual routers to finish booting."
+    docker_container_info:
+      name: "{{ item }}"
+    register: cont_check
+    until: cont_check.container.State.Health.Status == 'healthy'
+    retries: 15
+    delay: 25
+    loop: "{{ vnodes }}"
+
+  - name: "TASK 1.3. Auto discover device IPs and add to inventory group."
+    set_fact:
+      dyn_grp: "{{ dyn_grp | combine({cont_name: {'ansible_host': cont_ip_add }}) }}"
+    vars:
+      cont_ip_add: "{{ item.container.NetworkSettings.IPAddress }}"
+      cont_name: '{{ item.container.Name | replace("/", "") }}'
+      dyn_grp: {}
+    loop: "{{ cont_data.results }}"
+    loop_control:
+      label: "{{ cont_name }}"
+
+  - name: "TASK 1.4. Dynamically create hosts.yml inventory."
+    copy:
+      content: "{{ dyn_inv | to_nice_yaml }}"
+      dest: ./lab_hosts.yml
+    vars:
+      dyn_inv:
+        "{{ {'all': {'children': {inv_name: {'hosts': dyn_grp}}}} }}"
+    

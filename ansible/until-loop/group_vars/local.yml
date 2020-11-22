@@ -1,0 +1,4 @@
+---
+vr_image_name: veos:4.18.10M
+inv_name: virtual_lab
+vnodes: [spine1, spine2, leaf1, leaf2]

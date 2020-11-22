@@ -1,0 +1,7 @@
+---
+ansible_connection: ansible.netcommon.httpapi
+ansible_network_os: eos
+ansible_user: ansible
+ansible_password: ansible
+ansible_become: yes
+ansible_become_method: enable

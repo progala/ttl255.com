@@ -1,0 +1,44 @@
+---
+- name: "PLAY 1. Use 'until' to wait for Web APP to come up."
+  hosts: local
+  connection: local
+  gather_facts: no
+
+  vars:
+    app_url: "http://127.0.0.1:5010"
+
+  tasks:
+  - name: "TASK 1.1. Start Web app (async 20 keeps up app in bg for 20 secs)."
+    command: python flask_app/main.py
+    async: 20
+    poll: 0
+    changed_when: no
+
+  - name: "TASK 1.2. Retrieve Web app home page (should fail)."
+    uri:
+      url: "{{ app_url }}"
+    register: app_hp
+    ignore_errors: yes
+
+  - name: "TASK 1.3. Display HTTP code returned by home page."
+    debug:
+      msg: "Web app returned {{ app_hp.status }} HTTP code"
+
+  - name: "TASK 1.4. Wait until GET to 'status' returns 'READY'."
+    uri:
+      url: "{{ app_url }}/status"
+    register: app_status
+    until: app_status.json.status == "READY"
+    retries: 10
+    delay: 1
+    
+  - name: "TASK 1.5. Retrieve Web app home page (should succeed now)."
+    uri:
+      url: "{{ app_url }}"
+    register: app_hp
+
+  - name: "TASK 1.6. Display HTTP code and body returned by home page."
+    debug:
+      msg: 
+        - "Web app returned {{ app_hp.status }} HTTP code"
+        - "Web page content: {{ lookup('url', app_url) }}"

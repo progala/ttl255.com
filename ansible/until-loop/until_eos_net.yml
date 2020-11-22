@@ -1,0 +1,51 @@
+---
+- name: "PLAY 1. Use 'until' to wait for BGP sessions to establish."
+  hosts: veos_net
+  gather_facts: no
+
+  tasks: 
+  - name: "TASK 1.1. Record peer IPs for use in 'until' task."
+    eos_command:
+      commands: 
+      - command: show ip bgp summary
+        output: json
+    register: init_bgp_sum
+
+  - name: "TASK 1.2. Forcefully reset BGP sessions."
+    eos_command:
+      commands: clear ip bgp neighbor *
+
+  - name: "TASK 1.3. Use 'until' to wait for all BGP sessions to establish."
+    eos_command:
+      commands:
+      - command: show ip bgp summary
+        output: json
+    register: u_bgp_sum
+    until: u_bgp_sum.stdout.0.vrfs.default.peers[item.key].peerState == "Established"
+    retries: 15
+    delay: 1
+    loop: "{{ init_bgp_sum.stdout.0.vrfs.default.peers | dict2items }}"
+    loop_control:
+      label: "{{ item.key }}"
+
+  - name: "TASK 1.4. Retrieve neighbor routes."
+    eos_command:
+      commands:
+      - command: "show ip bgp neighbors {{ item.key }} routes"
+        output: json
+    register: nbr_routes
+    loop: "{{ init_bgp_sum.stdout.0.vrfs.default.peers | dict2items }}"
+    loop_control:
+      label: "{{ item.key }}"
+
+  - name: "TASK 1.5. Display neighbor routes."
+    debug:
+      msg: 
+        - "{{ ''.center(80, '=') }}"
+        - "Neighbor: {{ nbr.item.key }}"
+        - "{{ nbr.stdout.0.vrfs.default.bgpRouteEntries.keys() | list }}"
+        - "{{ ''.center(80, '=') }}"
+    loop: "{{ nbr_routes.results }}"
+    loop_control:
+      loop_var: nbr
+      label: "{{ nbr.item.key }}"
